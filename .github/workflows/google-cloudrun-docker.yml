@@ -50,7 +50,7 @@ on:
       - main
 
 env:
-  PROJECT_ID: anil-dev # TODO: update Google Cloud project id
+  PROJECT_ID: anil-etalk-test # TODO: update Google Cloud project id
   #GAR_LOCATION: githubaction-cloudrun-repo # TODO: update Artifact Registry location
   GAR_LOCATION: gcr.io
   SERVICE: githubaction-cloudrun # TODO: update Cloud Run service name
