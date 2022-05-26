@@ -1,3 +1,49 @@
+****** Setup Workload Identity Federation************
+export PROJECT_ID="anil-etalk-test"
+
+gcloud iam workload-identity-pools create "my-pool1" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --display-name="Demo pool1"
+
+gcloud iam workload-identity-pools describe "my-pool1" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --format="value(name)"
+
+export WORKLOAD_IDENTITY_POOL_ID=projects/932227783844/locations/global/workloadIdentityPools/my-pool1
+
+
+gcloud iam workload-identity-pools providers create-oidc "my-provider1" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --workload-identity-pool="my-pool1" \
+  --display-name="Demo provider1" \
+  --attribute-mapping="google.subject=assertion.sub,attribute.actor=assertion.actor,attribute.repository=assertion.repository" \
+  --attribute-mapping="google.subject=assertion.sub,attribute.repository_owner=assertion.repository_owner" \
+  --issuer-uri="https://token.actions.githubusercontent.com"
+  
+
+export REPO="anilphub/googlepoctest1"
+
+gcloud iam service-accounts add-iam-policy-binding "akp-devnxt-sa@anil-etalk-test.iam.gserviceaccount.com" \
+  --project="${PROJECT_ID}" \
+  --role="roles/iam.workloadIdentityUser" \
+  --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}"
+
+
+gcloud iam workload-identity-pools providers describe "my-provider1" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --workload-identity-pool="my-pool1" \
+  --format="value(name)"
+  
+workload_identity_provider = projects/932227783844/locations/global/workloadIdentityPools/my-pool1/providers/my-provider1
+
+***********************************END******************************************************
+
+
+
 One of the Common Error:
 Error: google-github-actions/auth failed with: retry function failed with 0 attempts: failed to generate Google Cloud access token for ***:
 {
