@@ -15,3 +15,8 @@ Screen Shot -
 Solution : 
 Check Attribute mapping as per below screen shot.
 ![image](https://user-images.githubusercontent.com/42490682/170504807-b3d3f7c1-d7a1-4898-a8d7-4cc681b333b3.png)
+
+Problem : Storage Error while executing githubaction for cloud run deployment
+Solution : Make sure that service account has below permission per screen shot
+
+![image](https://user-images.githubusercontent.com/42490682/170511909-8ef1cdd4-acf3-4cfd-843b-36207318ad35.png)
