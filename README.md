@@ -1,8 +1,13 @@
+What is Workload Identity Federation?
+
+Workload Identity Federation is amazing and helps us keyless deployment integration with third party applications. You can grant on-premises or multi-cloud workloads access to Google Cloud resources, without using a service account key.
+
+
 ****** Setup Workload Identity Federation************
 
 export PROJECT_ID="anil-etalk-test"
 
-1. Create a new workload identity pool:
+STEP 1. Create a new workload identity pool:
 
 gcloud iam workload-identity-pools create "my-pool1" \
   --project="${PROJECT_ID}" \
@@ -16,7 +21,7 @@ gcloud iam workload-identity-pools describe "my-pool1" \
 
 export WORKLOAD_IDENTITY_POOL_ID=projects/932227783844/locations/global/workloadIdentityPools/my-pool1
 
-2. Add a workload identity pool provider:
+STEP 2. Add a workload identity pool provider:
 
 gcloud iam workload-identity-pools providers create-oidc "my-provider1" \
   --project="${PROJECT_ID}" \
@@ -48,7 +53,7 @@ workload_identity_provider = projects/932227783844/locations/global/workloadIden
 
 
 
-One of the Common Error:
+POSSIBLE ERROR : One of the Common Error:
 Error: google-github-actions/auth failed with: retry function failed with 0 attempts: failed to generate Google Cloud access token for ***:
 {
   "error": {
